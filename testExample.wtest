@@ -1,9 +1,96 @@
-import example.pepita
+import vehiculos.* 
+import adatacionInteriorColorYMotor.*
 
-describe "group of tests for pepita" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "punto 1" {
+  const reyDeCopas = new Torino(
+    color = rojo,
+    autonomia = 300,
+    velocidadMax = 120
+  )
+  const academia = new Torino(
+    color = celeste,
+    autonomia = 250,
+    velocidadMax = 110
+  )
+  const cuervo = new Economico()
+  const xeneize = new Economico()
+  const millonario = new Economico()
+  
+  method initialize() {
+    cuervo.añadirAdaptacion(tanqueExtraDeGas)
+    cuervo.añadirAdaptacion(transportadorDeSilla)
+    
+    xeneize.añadirAdaptacion(cañoDeEscapeExtra)
   }
-
+  
+  test "el rey de copas" {
+    assert.equals(rojo, reyDeCopas.color())
+    assert.equals(300, reyDeCopas.autonomia())
+    assert.equals(120, reyDeCopas.velocidadMax())
+    assert.equals(4, reyDeCopas.capacidad())
+    assert.notThat(reyDeCopas.puedeTransportarSilla())
+    assert.that(reyDeCopas.esRuidoso())
+  }
+  
+  test "la academia" {
+    assert.equals(celeste, academia.color())
+    assert.equals(250, academia.autonomia())
+    assert.equals(110, academia.velocidadMax())
+    assert.equals(4, academia.capacidad())
+    assert.notThat(academia.puedeTransportarSilla())
+    assert.that(academia.esRuidoso())
+  }
+  
+  test "el cuervo" {
+    assert.equals(beige, cuervo.color())
+    assert.equals(380, cuervo.autonomia())
+    assert.equals(80, cuervo.velocidadMax())
+    assert.equals(3, cuervo.capacidad())
+    assert.that(cuervo.puedeTransportarSilla())
+    assert.notThat(cuervo.esRuidoso())
+  }
+  
+  test "xeneize" {
+    assert.equals(beige, xeneize.color())
+    assert.equals(190, xeneize.autonomia())
+    assert.equals(115, xeneize.velocidadMax())
+    assert.equals(5, xeneize.capacidad())
+    assert.notThat(xeneize.puedeTransportarSilla())
+    assert.notThat(xeneize.esRuidoso())
+  }
+  
+  test "millonario" {
+    assert.equals(beige, millonario.color())
+    assert.equals(200, millonario.autonomia())
+    assert.equals(120, millonario.velocidadMax())
+    assert.equals(5, millonario.capacidad())
+    assert.notThat(millonario.puedeTransportarSilla())
+    assert.that(millonario.esRuidoso())
+  }
+  
+  test "motor urbano e interior accesible" {
+    combiAdaptable.asignarMotor(urbano)
+    combiAdaptable.asignarInterior(interiorAccesible)
+    
+    assert.equals(celeste, combiAdaptable.color())
+    assert.equals(1000, combiAdaptable.autonomia())
+    assert.equals(130, combiAdaptable.velocidadMax())
+    assert.equals(5, combiAdaptable.capacidad())
+    assert.that(combiAdaptable.puedeTransportarSilla())
+    assert.notThat(combiAdaptable.esRuidoso())
+  }
+  
+  test "motor deportivo e interior espacioso" {
+    combiAdaptable.asignarMotor(deportivo)
+    combiAdaptable.asignarInterior(interiorEspacioso)
+    
+    assert.equals(celeste, combiAdaptable.color())
+    assert.equals(400, combiAdaptable.autonomia())
+    assert.equals(230, combiAdaptable.velocidadMax())
+    assert.equals(7, combiAdaptable.capacidad())
+    assert.notThat(combiAdaptable.puedeTransportarSilla())
+    assert.that(combiAdaptable.esRuidoso())
+  }
 }
+
